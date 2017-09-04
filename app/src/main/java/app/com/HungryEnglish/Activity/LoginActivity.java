@@ -39,9 +39,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        context = LoginActivity.this;
+        context = getApplicationContext();
         click = new AlphaAnimation(1F, 0.5F);
-        utils = new Utils(LoginActivity.this);
+        utils = new Utils(context);
         idMapping();
     }
 
@@ -52,7 +52,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         passwordEdt = (EditText) findViewById(R.id.activity_login_password);
         forgotPasswordTxt = (TextView) findViewById(R.id.txt_forgot_password);
 
-        setTitle("Login");
+        setTitle(getString(R.string.sign_in));
 
         registerBtn.setOnClickListener(this);
         loginBtn.setOnClickListener(this);
@@ -67,23 +67,23 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 break;
             case R.id.activity_login_btn:
 
-                if (emailEdt.getText().toString().equalsIgnoreCase("")) {
-                    emailEdt.setError("Enter Email Address");
+                if (emailEdt.getText().toString().equalsIgnoreCase(getString(R.string.null_value))) {
+                    emailEdt.setError(getString(R.string.email_validation));
                     emailEdt.requestFocus();
                     return;
                 }
-                if (passwordEdt.getText().toString().equalsIgnoreCase("")) {
-                    passwordEdt.setError("Enter Password");
+                if (passwordEdt.getText().toString().equalsIgnoreCase(getString(R.string.null_value))) {
+                    passwordEdt.setError(getString(R.string.password_validation));
                     passwordEdt.requestFocus();
                     return;
                 }
                 if (passwordEdt.getText().toString().trim().length() < 6) {
-                    passwordEdt.setError("Password must be minimun 6 character");
+                    passwordEdt.setError(getString(R.string.password_validation));
                     passwordEdt.requestFocus();
                     return;
                 }
                 if (Token == null) {
-                    toast("Please Try Again");
+                    toast(getString(R.string.try_again));
                     return;
                 }
                 callLoginApi();
@@ -99,22 +99,22 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     // CALL LOGIN API HERE
     private void callLoginApi() {
 
-        if (!Utils.checkNetwork(LoginActivity.this)) {
-            Utils.showCustomDialog(getResources().getString(R.string.internet_error), getResources().getString(R.string.internet_connection_error), LoginActivity.this);
+        if (!Utils.checkNetwork(context)) {
+            Utils.showCustomDialog(getResources().getString(R.string.internet_error), getResources().getString(R.string.internet_connection_error), this);
             return;
         }
 
-        Utils.showDialog(LoginActivity.this);
+        Utils.showDialog(context);
         ApiHandler.getApiService().getLogin(getLoginDetail(), new retrofit.Callback<LoginMainResponse>() {
             @Override
             public void success(LoginMainResponse loginUser, Response response) {
                 Utils.dismissDialog();
                 if (loginUser == null) {
-                    toast("Something Wrong");
+                    toast(getString(R.string.something_wrong));
                     return;
                 }
                 if (loginUser.getStatus() == null) {
-                    toast("Something Wrong");
+                    toast(getString(R.string.something_wrong));
                     return;
                 }
                 if (loginUser.getStatus().equals("false")) {
@@ -127,11 +127,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
                     String isActiveStatue = loginUser.getData().getIsActive();
                
-                    Utils.WriteSharePrefrence(LoginActivity.this, Constant.SHARED_PREFS.KEY_USER_ID, loginUser.getData().getId());
-                    Utils.WriteSharePrefrence(LoginActivity.this, Constant.SHARED_PREFS.KEY_USER_ROLE, role);
-                    Utils.WriteSharePrefrence(LoginActivity.this, Constant.SHARED_PREFS.KEY_USER_NAME, loginUser.getData().getUsername());
-                    Utils.WriteSharePrefrence(LoginActivity.this, Constant.SHARED_PREFS.KEY_IS_LOGGED_IN, "1");
-                    Utils.WriteSharePrefrence(LoginActivity.this, Constant.SHARED_PREFS.KEY_IS_ACTIVE, isActiveStatue);
+                    Utils.WriteSharePrefrence(context, Constant.SHARED_PREFS.KEY_USER_ID, loginUser.getData().getId());
+                    Utils.WriteSharePrefrence(context, Constant.SHARED_PREFS.KEY_USER_ROLE, role);
+                    Utils.WriteSharePrefrence(context, Constant.SHARED_PREFS.KEY_USER_NAME, loginUser.getData().getUsername());
+                    Utils.WriteSharePrefrence(context, Constant.SHARED_PREFS.KEY_IS_LOGGED_IN, "1");
+                    Utils.WriteSharePrefrence(context, Constant.SHARED_PREFS.KEY_IS_ACTIVE, isActiveStatue);
 
                     if (role.equalsIgnoreCase("student") && isActiveStatue.equalsIgnoreCase("0")) {
                         startActivity(StudentProfileActivity.class);
@@ -143,7 +143,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         finish();
                     } else if (role.equalsIgnoreCase("teacher") && isActiveStatue.equalsIgnoreCase("0")) {
 
-                        toast("Admin will approve your request.");
+                        toast(getString(R.string.admin_approve_request));
 
                     } else if (role.equalsIgnoreCase("teacher") && isActiveStatue.equalsIgnoreCase("1")) {
                         startActivity(MainActivity.class);
@@ -166,7 +166,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 Utils.dismissDialog();
                 error.printStackTrace();
                 error.getMessage();
-                toast("Something Wrong");
+                toast(getString(R.string.something_wrong));
             }
         });
 

@@ -39,7 +39,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        setTitle("Sign up");
+        setTitle(getString(R.string.signup));
         idMapping();
     }
 
@@ -102,37 +102,32 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
                 if (!Patterns.EMAIL_ADDRESS.matcher(
                         emailEdt.getText().toString()).matches()) {
-                    emailEdt.setError("Enter Valid Email Address");
+                    emailEdt.setError(getString(R.string.email_validation));
                     emailEdt.requestFocus();
                     return;
                 }
 
                 if (passwordEdt.getText().toString().equals("")) {
-                    passwordEdt.setError("Enter Password");
+                    passwordEdt.setError(getString(R.string.password_validation));
                     passwordEdt.requestFocus();
                     return;
                 }
 
                 if (passwordEdt.getText().toString().trim().length() < 6) {
-                    passwordEdt.setError("Password must be minimun 6 character");
+                    passwordEdt.setError(getString(R.string.password_validation));
                     passwordEdt.requestFocus();
                     return;
                 }
 
-                if (passwordEdt.getText().toString().length() > 15) {
-                    passwordEdt.setError("Password must be maximum 15 character");
-                    passwordEdt.requestFocus();
-                    return;
-                }
 
                 if (mobileEdt.getText().toString().equals("")) {
-                    mobileEdt.setError("Enter Mobile Number");
+                    mobileEdt.setError(getString(R.string.enter_mobile_or_wechat));
                     mobileEdt.requestFocus();
                     return;
                 }
 
                 if (mobileEdt.getText().toString().trim().length() == 9) {
-                    mobileEdt.setError("Mobile number must be 10 digit");
+                    mobileEdt.setError(getString(R.string.mobile_no_validation));
                     mobileEdt.requestFocus();
                     return;
                 }
@@ -184,13 +179,13 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             @Override
             public void success(RegisterMainResponse registerMainResponse, Response response) {
                 if (registerMainResponse == null) {
-                    toast("Something Wrong");
+                    toast(getString(R.string.something_wrong));
 
                     return;
 
                 }
                 if (registerMainResponse.getStatus() == null) {
-                    toast("Something Wrong");
+                    toast(getString(R.string.something_wrong));
 
                     return;
                 }
@@ -211,7 +206,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             public void failure(RetrofitError error) {
                 error.printStackTrace();
                 error.getMessage();
-                toast("Something Wrong");
+                toast(getString(R.string.something_wrong));
             }
         });
 

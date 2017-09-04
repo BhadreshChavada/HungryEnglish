@@ -68,7 +68,8 @@ public class ForgotPassword extends BaseActivity implements View.OnClickListener
                 checkEmail();
 
             } else {
-                Toast.makeText(this, "Enter Valid Email", Toast.LENGTH_SHORT).show();
+                edtEmail.setError(getString(R.string.email_validation));
+                edtEmail.requestFocus();
             }
 
         } else if (v.getId() == R.id.activity_forgot_password_otp_submit_btn) {
@@ -82,7 +83,8 @@ public class ForgotPassword extends BaseActivity implements View.OnClickListener
                 llOTP.setVisibility(View.GONE);
 
             } else {
-                Toast.makeText(this, "Enter Valid OTP.", Toast.LENGTH_SHORT).show();
+                edtOtp.setError(getString(R.string.otp_validation));
+                edtOtp.requestFocus();
             }
         } else if (v.getId() == R.id.activity_forgot_password_submit_password_btn) {
 
@@ -91,23 +93,27 @@ public class ForgotPassword extends BaseActivity implements View.OnClickListener
                 ResetPassword();
 
             } else if (edtPassword.getText().length() > 5) {
-                Toast.makeText(this, "Password Mismatch", Toast.LENGTH_SHORT).show();
+                edtPassword.setError(getString(R.string.password_validation));
+                edtPassword.requestFocus();
             } else {
-                Toast.makeText(this, "Enter Password greater then 5 character", Toast.LENGTH_SHORT).show();
+
+                edtPassword.setError(getString(R.string.password_validation));
+                edtPassword.requestFocus();
             }
+
         } else if (v.getId() == txtResendOtp.getId()) {
             sendEmail();
-            Toast.makeText(this, "Email Send Successfully", Toast.LENGTH_SHORT).show();
+            toast(getString(R.string.email_send_successfully));
         }
     }
 
     private void checkEmail() {
-        if (!Utils.checkNetwork(ForgotPassword.this)) {
-            Utils.showCustomDialog(getResources().getString(R.string.internet_error), getResources().getString(R.string.internet_connection_error), ForgotPassword.this);
+        if (!Utils.checkNetwork(getApplicationContext())) {
+            Utils.showCustomDialog(getResources().getString(R.string.internet_error), getResources().getString(R.string.internet_connection_error), this);
             return;
         }
 
-        Utils.showDialog(ForgotPassword.this);
+        Utils.showDialog(getApplicationContext());
         HashMap<String, String> map = new HashMap<>();
         map.put("email", edtEmail.getText().toString());
 
@@ -120,9 +126,9 @@ public class ForgotPassword extends BaseActivity implements View.OnClickListener
 
                 if (forgotPasswordModel.getStatus().toString().equalsIgnoreCase("true")) {
                     sendEmail();
-                    Toast.makeText(ForgotPassword.this, forgotPasswordModel.getMsg(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), forgotPasswordModel.getMsg(), Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(ForgotPassword.this, forgotPasswordModel.getMsg(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), forgotPasswordModel.getMsg(), Toast.LENGTH_SHORT).show();
                 }
 
 
@@ -131,18 +137,18 @@ public class ForgotPassword extends BaseActivity implements View.OnClickListener
             @Override
             public void failure(RetrofitError error) {
                 Utils.dismissDialog();
-                Toast.makeText(ForgotPassword.this, "Try Again", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Try Again", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private void ResetPassword() {
-        if (!Utils.checkNetwork(ForgotPassword.this)) {
-            Utils.showCustomDialog(getResources().getString(R.string.internet_error), getResources().getString(R.string.internet_connection_error), ForgotPassword.this);
+        if (!Utils.checkNetwork(getApplicationContext())) {
+            Utils.showCustomDialog(getResources().getString(R.string.internet_error), getResources().getString(R.string.internet_connection_error), this);
             return;
         }
 
-        Utils.showDialog(ForgotPassword.this);
+        Utils.showDialog(getApplicationContext());
         HashMap<String, String> map = new HashMap<>();
         map.put("email", edtEmail.getText().toString());
         map.put("password", edtPassword.getText().toString());
@@ -153,39 +159,22 @@ public class ForgotPassword extends BaseActivity implements View.OnClickListener
             public void success(ForgotPasswordModel forgotPasswordModel, Response response) {
 
                 Utils.dismissDialog();
-                Toast.makeText(ForgotPassword.this, forgotPasswordModel.getMsg(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), forgotPasswordModel.getMsg(), Toast.LENGTH_SHORT).show();
 
                 if (forgotPasswordModel.getStatus().toString().equalsIgnoreCase("true")) {
                     onBackPressed();
-                }else{
-                    Toast.makeText(ForgotPassword.this, forgotPasswordModel.getMsg(), Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), forgotPasswordModel.getMsg(), Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void failure(RetrofitError error) {
                 Utils.dismissDialog();
-                Toast.makeText(ForgotPassword.this, "Try Again", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Try Again", Toast.LENGTH_SHORT).show();
             }
         });
     }
-
-
-//        ApiHandler.getApiService().getLogin(getLoginDetail(), new retrofit.Callback<LoginMainResponse>() {
-//            @Override
-//            public void success(LoginMainResponse loginUser, Response response) {
-//                Utils.dismissDialog();
-//            }
-//        }
-//
-//        @Override
-//        public void failure (RetrofitError error){
-//            Utils.dismissDialog();
-//            error.printStackTrace();
-//            error.getMessage();
-//            Toast.makeText(getApplicationContext(), "Something Wrong", Toast.LENGTH_SHORT).show();
-//        }
-//    });
 
 
     private void sendEmail() {
@@ -236,11 +225,9 @@ public class ForgotPassword extends BaseActivity implements View.OnClickListener
         protected Boolean doInBackground(Void... params) {
             try {
                 if (m.send()) {
-//                    Toast.makeText(activity, "Email sent.", Toast.LENGTH_SHORT).show();
 
 
                 } else {
-//                Toast.makeText(activity, "Email failed to send.", Toast.LENGTH_SHORT).show();
                 }
 
                 return true;
@@ -248,18 +235,15 @@ public class ForgotPassword extends BaseActivity implements View.OnClickListener
                 Log.e(SendEmailAsyncTask.class.getName(), "Bad account details");
                 e.printStackTrace();
 
-//            Toast.makeText(activity, "Authentication failed.", Toast.LENGTH_SHORT).show();
                 return false;
             } catch (MessagingException e) {
                 Log.e(SendEmailAsyncTask.class.getName(), "Email failed");
                 e.printStackTrace();
 
-//            Toast.makeText(activity, "Email failed to send.", Toast.LENGTH_SHORT).show();
                 return false;
             } catch (Exception e) {
                 e.printStackTrace();
 
-//            Toast.makeText(activity, "Unexpected error occured.", Toast.LENGTH_SHORT).show();
                 return false;
             }
         }

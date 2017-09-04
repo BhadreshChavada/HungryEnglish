@@ -103,7 +103,7 @@ public class TeacherProfileActivity extends BaseActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_profile);
 
-        mContext = TeacherProfileActivity.this;
+        mContext = getApplicationContext();
         getDataFromIntent();
         idMapping();
 
@@ -116,7 +116,6 @@ public class TeacherProfileActivity extends BaseActivity implements
             id = extras.getString("id");
             role = extras.getString("role");
             CallFrom = extras.getString("callFrom");
-//            Toast.makeText(mContext, CallFrom, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -143,7 +142,7 @@ public class TeacherProfileActivity extends BaseActivity implements
         emailEdit = (EditText) findViewById(R.id.emailEdit);
         btnSubmiTeacherProfile = (Button) findViewById(R.id.btnSubmiTeacherProfile);
 
-        String role = Utils.ReadSharePrefrence(TeacherProfileActivity.this, Constant.SHARED_PREFS.KEY_USER_ROLE);
+        String role = Utils.ReadSharePrefrence(getApplicationContext(), Constant.SHARED_PREFS.KEY_USER_ROLE);
         if (role.equalsIgnoreCase("admin")) {
             ivViewCv.setVisibility(View.VISIBLE);
             ivViewAudio.setVisibility(View.VISIBLE);
@@ -152,7 +151,7 @@ public class TeacherProfileActivity extends BaseActivity implements
 
         if (CallFrom.equals("Student")) {
 
-            btnSubmiTeacherProfile.setText(TeacherProfileActivity.this.getString(R.string.requst_teacher));
+            btnSubmiTeacherProfile.setText(getApplicationContext().getString(R.string.requst_teacher));
 
             TextInputLayout wechatLayout = (TextInputLayout) findViewById(R.id.wechat_id_textinput);
             TextInputLayout cvLayout = (TextInputLayout) findViewById(R.id.text_input_layout_uploadCV);
@@ -187,7 +186,7 @@ public class TeacherProfileActivity extends BaseActivity implements
 
 
         } else if (CallFrom.equals("Admin")) {
-            btnSubmiTeacherProfile.setText(TeacherProfileActivity.this.getString(R.string.submit));
+            btnSubmiTeacherProfile.setText(getApplicationContext().getString(R.string.submit));
 
             profileImage.setOnClickListener(this);
 //            idProofImage.setOnClickListener(this);
@@ -199,7 +198,7 @@ public class TeacherProfileActivity extends BaseActivity implements
             ivViewAudio.setOnClickListener(this);
             btn_id_proof.setOnClickListener(this);
         } else {
-            btnSubmiTeacherProfile.setText(TeacherProfileActivity.this.getString(R.string.submit));
+            btnSubmiTeacherProfile.setText(getApplicationContext().getString(R.string.submit));
 
             profileImage.setOnClickListener(this);
 //            idProofImage.setOnClickListener(this);
@@ -321,7 +320,7 @@ public class TeacherProfileActivity extends BaseActivity implements
                     } else {
                         pathProfilePic = getPath(this, data.getData());
                     }
-                    Picasso.with(TeacherProfileActivity.this).load(Uri.fromFile(new File(pathProfilePic))).error(R.drawable.ic_user_default).into(profileImage);
+                    Picasso.with(getApplicationContext()).load(Uri.fromFile(new File(pathProfilePic))).placeholder(R.drawable.ic_user_default).error(R.drawable.ic_user_default).into(profileImage);
                     break;
                 case SELECT_ID_PROOF:
                     if (Build.VERSION.SDK_INT <= 21) {
@@ -333,7 +332,7 @@ public class TeacherProfileActivity extends BaseActivity implements
                     cvFileName = spiltFileNameArray[spiltFileNameArray.length - 1];
                     btn_id_proof.setText(cvFileName);
 
-                    Picasso.with(TeacherProfileActivity.this).load(Uri.fromFile(new File(pathIdProofPic))).error(R.drawable.ic_user_default).into(idProofImage);
+                    Picasso.with(getApplicationContext()).load(Uri.fromFile(new File(pathIdProofPic))).placeholder(R.drawable.ic_user_default).error(R.drawable.ic_user_default).into(idProofImage);
                     break;
                 case SELECT_FILE:
                     if (Build.VERSION.SDK_INT <= 21) {
@@ -345,7 +344,7 @@ public class TeacherProfileActivity extends BaseActivity implements
                     cvFileName = spiltArray[spiltArray.length - 1];
                     btnCvUpload.setText(cvFileName);
                     if (!pathCvDoc.equals("")) {
-                        Picasso.with(TeacherProfileActivity.this).load(R.drawable.ic_file).into(ivCVFileStatus);
+                        Picasso.with(getApplicationContext()).load(R.drawable.ic_file).placeholder(R.drawable.ic_user_default).error(R.drawable.ic_user_default).into(ivCVFileStatus);
                     }
                     break;
                 case SELECT_AUDIO:
@@ -358,7 +357,7 @@ public class TeacherProfileActivity extends BaseActivity implements
                     audioFileName = spiltAudioArray[spiltAudioArray.length - 1];
                     btnAudioFile.setText(audioFileName);
                     if (!btnAudioFile.equals("")) {
-                        Picasso.with(TeacherProfileActivity.this).load(R.drawable.ic_file).into(ivAudioFileStatus);
+                        Picasso.with(getApplicationContext()).load(R.drawable.ic_file).placeholder(R.drawable.ic_user_default).error(R.drawable.ic_user_default).into(ivAudioFileStatus);
                     }
                     break;
 
@@ -407,8 +406,8 @@ public class TeacherProfileActivity extends BaseActivity implements
     }
 
     private void getProfile() {
-        if (!Utils.checkNetwork(TeacherProfileActivity.this)) {
-            Utils.showCustomDialog("Internet Connection !", getResources().getString(R.string.internet_connection_error), TeacherProfileActivity.this);
+        if (!Utils.checkNetwork(getApplicationContext())) {
+            Utils.showCustomDialog(getString(R.string.internet_error), getResources().getString(R.string.internet_connection_error), this);
             return;
         }
         HashMap<String, String> map = new HashMap<>();
@@ -430,28 +429,28 @@ public class TeacherProfileActivity extends BaseActivity implements
                     avaibilityDateTeacherEdit.setText(teacherProfileMain.getInfo().getAvailableTime());
                     currnetPlaceEdit.setText(teacherProfileMain.getInfo().getAddress());
                     specialSkillTeacherEdit.setText(teacherProfileMain.getInfo().getSkills());
-                    Picasso.with(TeacherProfileActivity.this).load(BASEURL + teacherProfileMain.getInfo().getProfileImage()).placeholder(R.drawable.ic_user_default).into(profileImage);
-                    Picasso.with(TeacherProfileActivity.this).load(BASEURL + teacherProfileMain.getInfo().getIdImage()).into(idProofImage);
+                    Picasso.with(getApplicationContext()).load(BASEURL + teacherProfileMain.getInfo().getProfileImage()).placeholder(R.drawable.ic_user_default).error(R.drawable.ic_user_default).into(profileImage);
+                    Picasso.with(getApplicationContext()).load(BASEURL + teacherProfileMain.getInfo().getIdImage()).placeholder(R.drawable.ic_user_default).error(R.drawable.ic_user_default).into(idProofImage);
                     resumePath = teacherProfileMain.getInfo().getResume();
                     String idProof = Constant.BASEURL+teacherProfileMain.getInfo().getIdImage();
                     String[] cvFileArray = resumePath.split("/");
                     if (cvFileArray.length > 1) {
                         btnCvUpload.setText(cvFileArray[cvFileArray.length - 1]);
-                        Picasso.with(TeacherProfileActivity.this).load(R.drawable.ic_file).into(ivCVFileStatus);
+                        Picasso.with(getApplicationContext()).load(R.drawable.ic_file).placeholder(R.drawable.ic_user_default).error(R.drawable.ic_user_default).into(ivCVFileStatus);
                     }
                     String[] idFileArray = teacherProfileMain.getInfo().getIdImage().split("/");
                     if(idFileArray.length>1){
                         btn_id_proof.setText(idFileArray[idFileArray.length - 1]);
-                        Picasso.with(TeacherProfileActivity.this).load(idProof).into(idProofImage);
+                        Picasso.with(getApplicationContext()).load(idProof).placeholder(R.drawable.ic_user_default).error(R.drawable.ic_user_default).into(idProofImage);
                     }else{
-                        Picasso.with(TeacherProfileActivity.this).load(R.drawable.ic_file).into(idProofImage);
+                        Picasso.with(getApplicationContext()).load(R.drawable.ic_file).placeholder(R.drawable.ic_user_default).error(R.drawable.ic_user_default).into(idProofImage);
                     }
 
                     audioPath = teacherProfileMain.getInfo().getAudioFile();
                     String[] audioFileArray = audioPath.split("/");
                     if (audioFileArray.length > 1) {
                         btnAudioFile.setText(audioFileArray[audioFileArray.length - 1]);
-                        Picasso.with(TeacherProfileActivity.this).load(R.drawable.ic_file).into(ivAudioFileStatus);
+                        Picasso.with(getApplicationContext()).load(R.drawable.ic_file).placeholder(R.drawable.ic_user_default).error(R.drawable.ic_user_default).into(ivAudioFileStatus);
                     }
                 }
             }
@@ -464,12 +463,12 @@ public class TeacherProfileActivity extends BaseActivity implements
     }
 
     private void callTeacherProfileApi() {
-        if (!Utils.checkNetwork(TeacherProfileActivity.this)) {
-            Utils.showCustomDialog("Internet Connection !", getResources().getString(R.string.internet_connection_error), TeacherProfileActivity.this);
+        if (!Utils.checkNetwork(getApplicationContext())) {
+            Utils.showCustomDialog(getString(R.string.internet_error), getResources().getString(R.string.internet_connection_error), this);
             return;
         }
 
-        Utils.showDialog(TeacherProfileActivity.this);
+        Utils.showDialog(getApplicationContext());
         TypedFile proImage = null, idProof = null, resume = null, audiofile = null;
 
         Map<String, TypedFile> files = new HashMap<String, TypedFile>();
@@ -483,19 +482,19 @@ public class TeacherProfileActivity extends BaseActivity implements
                 public void success(TeacherProfileMainResponse teacherProfileMainResponse, Response response) {
                     Utils.dismissDialog();
                     if (teacherProfileMainResponse == null) {
-                        Toast.makeText(getApplicationContext(), "Something Wrong", Toast.LENGTH_SHORT).show();
+                        toast(getString(R.string.something_wrong));
                         return;
                     }
                     if (teacherProfileMainResponse.getStatus() == null) {
-                        Toast.makeText(getApplicationContext(), "Something Wrong", Toast.LENGTH_SHORT).show();
+                        toast(getString(R.string.something_wrong));
                         return;
                     }
                     if (teacherProfileMainResponse.getStatus().equals("false")) {
-                        Toast.makeText(getApplicationContext(), "" + teacherProfileMainResponse.getMsg(), Toast.LENGTH_SHORT).show();
+                        toast(teacherProfileMainResponse.getMsg());
                         return;
                     }
                     if (teacherProfileMainResponse.getStatus().equals("true")) {
-                        Toast.makeText(getApplicationContext(), "" + teacherProfileMainResponse.getMsg(), Toast.LENGTH_SHORT).show();
+                        toast(teacherProfileMainResponse.getMsg());
 //                        startActivity(MainActivity.class);
                         finish();
                     }
@@ -505,7 +504,7 @@ public class TeacherProfileActivity extends BaseActivity implements
                 public void failure(RetrofitError error) {
                     Utils.dismissDialog();
                     error.printStackTrace();
-                    toast("Something Wrong");
+                    toast(getString(R.string.something_wrong));
                 }
             });
         } else {
@@ -532,19 +531,19 @@ public class TeacherProfileActivity extends BaseActivity implements
                 public void success(TeacherProfileMainResponse teacherProfileMainResponse, Response response) {
                     Utils.dismissDialog();
                     if (teacherProfileMainResponse == null) {
-                        Toast.makeText(getApplicationContext(), "Something Wrong", Toast.LENGTH_SHORT).show();
+                        toast(getString(R.string.something_wrong));
                         return;
                     }
                     if (teacherProfileMainResponse.getStatus() == null) {
-                        Toast.makeText(getApplicationContext(), "Something Wrong", Toast.LENGTH_SHORT).show();
+                        toast(getString(R.string.something_wrong));
                         return;
                     }
                     if (teacherProfileMainResponse.getStatus().equals("false")) {
-                        Toast.makeText(getApplicationContext(), "" + teacherProfileMainResponse.getMsg(), Toast.LENGTH_SHORT).show();
+                        toast(teacherProfileMainResponse.getMsg());
                         return;
                     }
                     if (teacherProfileMainResponse.getStatus().equals("true")) {
-                        Toast.makeText(getApplicationContext(), "" + teacherProfileMainResponse.getMsg(), Toast.LENGTH_SHORT).show();
+                        toast(teacherProfileMainResponse.getMsg());
 //                        startActivity(MainActivity.class);
                         finish();
                     }
@@ -554,7 +553,7 @@ public class TeacherProfileActivity extends BaseActivity implements
                 public void failure(RetrofitError error) {
                     Utils.dismissDialog();
                     error.printStackTrace();
-                    toast("Something Wrong");
+                    toast(getString(R.string.something_wrong));
                 }
             });
         }
@@ -565,7 +564,7 @@ public class TeacherProfileActivity extends BaseActivity implements
     private Map<String, String> getTeacherProfileDetail() {
         Map<String, String> map = new HashMap<>();
         if (role.equalsIgnoreCase("")) {
-            String userId = Utils.ReadSharePrefrence(TeacherProfileActivity.this, KEY_USER_ID);
+            String userId = Utils.ReadSharePrefrence(getApplicationContext(), KEY_USER_ID);
             map.put("uId", userId);
         } else {
             map.put("uId", id);
@@ -586,7 +585,7 @@ public class TeacherProfileActivity extends BaseActivity implements
     }
 
     public void logout(View view) {
-        final Dialog dialog = new Dialog(TeacherProfileActivity.this);
+        final Dialog dialog = new Dialog(getApplicationContext());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.popup_logout);
         dialog.setCancelable(false);
@@ -597,7 +596,7 @@ public class TeacherProfileActivity extends BaseActivity implements
             public void onClick(View v) {
                 clear();
                 write(Constant.SHARED_PREFS.KEY_IS_LOGGED_IN, "0");
-                Intent intent = new Intent(TeacherProfileActivity.this, LoginActivity.class);
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -635,7 +634,7 @@ public class TeacherProfileActivity extends BaseActivity implements
 
 
                 if (forgotPasswordModel.getStatus().toString().equals("true")) {
-                    Toast.makeText(mContext, forgotPasswordModel.getMsg(), Toast.LENGTH_SHORT).show();
+                    toast(forgotPasswordModel.getMsg());
                     sendEmail(Utils.ReadSharePrefrence(mContext, Constant.SHARED_PREFS.KEY_USER_NAME), String.valueOf(userNameEdit.getText()));
 
                     onBackPressed();
@@ -645,7 +644,7 @@ public class TeacherProfileActivity extends BaseActivity implements
             @Override
             public void failure(RetrofitError error) {
                 Utils.dismissDialog();
-                Toast.makeText(mContext, "Try Again", Toast.LENGTH_SHORT).show();
+                toast(getString(R.string.try_again));
             }
         });
 
@@ -680,12 +679,9 @@ public class TeacherProfileActivity extends BaseActivity implements
         protected Boolean doInBackground(Void... params) {
             try {
                 if (m.send()) {
-//                    Toast.makeText(activity, "Email sent.", Toast.LENGTH_SHORT).show();
 
 
                 } else {
-//                Toast.makeText(activity, "Email failed to send.", Toast.LENGTH_SHORT).show();
-//                    onBackPressed();
                 }
 
                 return true;

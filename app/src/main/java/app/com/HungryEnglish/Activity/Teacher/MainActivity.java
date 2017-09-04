@@ -114,10 +114,10 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        String role = Utils.ReadSharePrefrence(MainActivity.this, Constant.SHARED_PREFS.KEY_USER_ROLE);
+        String role = Utils.ReadSharePrefrence(getApplicationContext(), Constant.SHARED_PREFS.KEY_USER_ROLE);
         switch (item.getItemId()) {
             case R.id.logout:
-                final Dialog dialog = new Dialog(MainActivity.this);
+                final Dialog dialog = new Dialog(getApplicationContext());
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.setContentView(R.layout.popup_logout);
                 dialog.setCancelable(false);
@@ -159,9 +159,9 @@ public class MainActivity extends BaseActivity {
     }
 
     private void callGetInfoApi() {
-        if (!Utils.checkNetwork(MainActivity.this)) {
+        if (!Utils.checkNetwork(getApplicationContext())) {
 
-            Utils.showCustomDialog("Internet Connection !", getResources().getString(R.string.internet_connection_error), MainActivity.this);
+            Utils.showCustomDialog(getString(R.string.internet_error), getResources().getString(R.string.internet_connection_error), this);
 
             return;
         } else {
@@ -172,11 +172,11 @@ public class MainActivity extends BaseActivity {
                 public void success(InfoMainResponse infoMainResponse, Response response) {
 
                     if (infoMainResponse == null) {
-                        toast("Something Wrong");
+                        toast(getString(R.string.something_wrong));
                         return;
                     }
                     if (infoMainResponse.getStatus() == null) {
-                        toast("Something Wrong");
+                        toast(getString(R.string.something_wrong));
                         return;
                     }
                     if (infoMainResponse.getStatus().equals("false")) {
@@ -241,7 +241,7 @@ public class MainActivity extends BaseActivity {
                 public void failure(RetrofitError error) {
                     error.printStackTrace();
                     error.getMessage();
-                    toast("Something Wrong");
+                    toast(getString(R.string.something_wrong));
                 }
             });
 
@@ -251,7 +251,7 @@ public class MainActivity extends BaseActivity {
 
     private void SetImage1() {
         temp = 1;
-        Picasso.with(MainActivity.this).load(imageURL1).placeholder(R.drawable.ic_add_img).error(R.drawable.ic_add_img).into(image_teacher_list_header);
+        Picasso.with(getApplicationContext()).load(imageURL1).placeholder(R.drawable.ic_add_img).error(R.drawable.ic_add_img).into(image_teacher_list_header);
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -262,7 +262,7 @@ public class MainActivity extends BaseActivity {
 
     private void SetImage2() {
         temp = 2;
-        Picasso.with(MainActivity.this).load(imageURL2).placeholder(R.drawable.ic_add_img).error(R.drawable.ic_add_img).into(image_teacher_list_header);
+        Picasso.with(getApplicationContext()).load(imageURL2).placeholder(R.drawable.ic_add_img).error(R.drawable.ic_add_img).into(image_teacher_list_header);
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -274,7 +274,7 @@ public class MainActivity extends BaseActivity {
 
     private void SetImage3() {
         temp = 3;
-        Picasso.with(MainActivity.this).load(imageURL3).placeholder(R.drawable.ic_add_img).error(R.drawable.ic_add_img).into(image_teacher_list_header);
+        Picasso.with(getApplicationContext()).load(imageURL3).placeholder(R.drawable.ic_add_img).error(R.drawable.ic_add_img).into(image_teacher_list_header);
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -292,13 +292,13 @@ public class MainActivity extends BaseActivity {
 
     private void addDynamicContactText(final String link1) {
         cnt = cnt + 1;
-        TextView tvLabel = new TextView(MainActivity.this);
+        TextView tvLabel = new TextView(getApplicationContext());
         LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         llp.setMargins(Math.round(getResources().getDimension(R.dimen._5sdp)), 0, 0, 0); // llp.setMargins(left, top, right, bottom);
         tvLabel.setLayoutParams(llp);
         tvLabel.setPadding(Math.round(getResources().getDimension(R.dimen._5sdp)), Math.round(getResources().getDimension(R.dimen._5sdp)), Math.round(getResources().getDimension(R.dimen._5sdp)), Math.round(getResources().getDimension(R.dimen._5sdp)));
         tvLabel.setText(link1);
-        tvLabel.setTextColor(ContextCompat.getColor(MainActivity.this, R.color.colorPrimaryDark));
+        tvLabel.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryDark));
         tvLabel.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.black));
         tvLabel.setTextSize(12);
         llLinkList.addView(tvLabel);

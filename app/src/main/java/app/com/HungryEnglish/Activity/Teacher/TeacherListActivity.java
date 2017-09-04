@@ -58,7 +58,7 @@ public class TeacherListActivity extends BaseActivity {
         setContentView(R.layout.activity_teacher_list);
 
         idMapping();
-        if (Utils.ReadSharePrefrence(TeacherListActivity.this, Constant.SHARED_PREFS.KEY_USER_ROLE).equalsIgnoreCase("student")) {
+        if (Utils.ReadSharePrefrence(getApplicationContext(), Constant.SHARED_PREFS.KEY_USER_ROLE).equalsIgnoreCase("student")) {
             callTeacherListApi();
         }
     }
@@ -73,25 +73,25 @@ public class TeacherListActivity extends BaseActivity {
 
     // CALL TEACHER LIST API HERE
     private void callTeacherListApi() {
-        if (!Utils.checkNetwork(TeacherListActivity.this)) {
-            Utils.showCustomDialog("Internet Connection !", getResources().getString(R.string.internet_connection_error), TeacherListActivity.this);
+        if (!Utils.checkNetwork(getApplicationContext())) {
+            Utils.showCustomDialog(getString(R.string.internet_error), getResources().getString(R.string.internet_connection_error), this);
             return;
         } else {
-            Utils.showDialog(TeacherListActivity.this);
+            Utils.showDialog(getApplicationContext());
             ApiHandler.getApiService().getTeacherList(getTeacherDetail(), new retrofit.Callback<TeacherListMainResponse>() {
                 @Override
                 public void success(TeacherListMainResponse teacherListMainResponse, Response response) {
                     Utils.dismissDialog();
                     if (teacherListMainResponse == null) {
-                        Toast.makeText(getApplicationContext(), "Something Wrong", Toast.LENGTH_SHORT).show();
+                        toast(getString(R.string.something_wrong));
                         return;
                     }
                     if (teacherListMainResponse.getStatus() == null) {
-                        Toast.makeText(getApplicationContext(), "Something Wrong", Toast.LENGTH_SHORT).show();
+                        toast(getString(R.string.something_wrong));
                         return;
                     }
                     if (teacherListMainResponse.getStatus().equals("false")) {
-                        Toast.makeText(getApplicationContext(), "" + teacherListMainResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                       toast(teacherListMainResponse.getMessage());
                         return;
                     }
                     if (teacherListMainResponse.getStatus().equals("true")) {
@@ -99,7 +99,7 @@ public class TeacherListActivity extends BaseActivity {
                         teacherList = new ArrayList<TeacherListResponse>();
                         teacherList = teacherListMainResponse.getData();
 
-                        teacherListAdapter = new TeacherListAdapter(TeacherListActivity.this, teacherList);
+                        teacherListAdapter = new TeacherListAdapter(getApplicationContext(), teacherList);
                         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
                         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
                         recyclerTearcherList.setLayoutManager(mLayoutManager);
@@ -114,7 +114,7 @@ public class TeacherListActivity extends BaseActivity {
                 public void failure(RetrofitError error) {
                     error.printStackTrace();
                     error.getMessage();
-                    Toast.makeText(getApplicationContext(), "Something Wrong", Toast.LENGTH_SHORT).show();
+                   toast(getString(R.string.something_wrong));
                 }
             });
         }
@@ -140,10 +140,10 @@ public class TeacherListActivity extends BaseActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        String role = Utils.ReadSharePrefrence(TeacherListActivity.this, Constant.SHARED_PREFS.KEY_USER_ROLE);
+        String role = Utils.ReadSharePrefrence(getApplicationContext(), Constant.SHARED_PREFS.KEY_USER_ROLE);
         switch (item.getItemId()) {
             case R.id.logout:
-                Utils.ClearSharePrefrence(TeacherListActivity.this);
+                Utils.ClearSharePrefrence(getApplicationContext());
                 startActivity(LoginActivity.class, true);
                 finish();
                 break;
