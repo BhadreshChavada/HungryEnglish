@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="C:\Users\Bhadresh Chavada\.android\build-cache\71cf92213dcaa82314f54c135e23a5a04b46a005\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="0772eec11be9e3803736882ae4bec4078986910e">
+        <dex dex="E:\Android Project\HungryEnglishClub2ndPhase\app\build\intermediates\pre-dexed\debug\classes_de2d468d1e956576ca30a79d4e3924cf5db707af.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Bhadresh Chavada\.android\build-cache\9202fd0347bbc1b10805ef13ea56d70810df031f\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="f260cdc1a267b17b911022919f19d568e6624229">
+        <dex dex="E:\Android Project\HungryEnglishClub2ndPhase\app\build\intermediates\pre-dexed\debug\classes_7dc05f096644534493b62df869916492bbe03890.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Bhadresh Chavada\.android\build-cache\c50c8f101304ebbed09d14a67aa160cc777ea948\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="05e8375b2ec26e4508b2a745d5a0623ba95f9b49">
+        <dex dex="E:\Android Project\HungryEnglishClub2ndPhase\app\build\intermediates\pre-dexed\debug\classes_400be1f25d972235e09787e48e46b39a0623ba90.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Bhadresh Chavada\.android\build-cache\bdaeb464838c978d7b35325b98416f320d931dd2\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="fc5624185d414a0f572bfb3df7d841ceb335aef9">
+        <dex dex="E:\Android Project\HungryEnglishClub2ndPhase\app\build\intermediates\pre-dexed\debug\classes_4e180758056d20fc432eef23095b857a5fc91412.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Bhadresh Chavada\.android\build-cache\2fbd322dc2e7d8551ea851ffbb28818cee03100a\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="2737331564e0084fc0eb30ba500564a6dbe5e98f">
+        <dex dex="E:\Android Project\HungryEnglishClub2ndPhase\app\build\intermediates\pre-dexed\debug\classes_fcd4e9e34363356b9c7cdc268363743646e610a0.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\Android Project\HungryEnglishClub2ndPhase\app\libs\activation.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d1257cbff6faa44c1f325ae0d9413522d4644383">
+        <dex dex="E:\Android Project\HungryEnglishClub2ndPhase\app\build\intermediates\pre-dexed\debug\activation_c6a4906f0aa92d79708be4ff9098d8c521e4eb18.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Bhadresh Chavada\.android\build-cache\94ccf01bc038ca3a3056f160d3bcd01f1c86160c\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="9a6350134db98fb39e212ddca5f0bad9280e8f3f">
+        <dex dex="E:\Android Project\HungryEnglishClub2ndPhase\app\build\intermediates\pre-dexed\debug\classes_2255f219a78f94d4084d0829457d7096894c9f7c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\Android Project\HungryEnglishClub2ndPhase\app\libs\mail.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="428e267abff0d10802ccde86b915da2c20471160">
+        <dex dex="E:\Android Project\HungryEnglishClub2ndPhase\app\build\intermediates\pre-dexed\debug\mail_2607c7d08e123ec9ee647a107de2c6e460773241.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\Android Project\HungryEnglishClub2ndPhase\app\libs\additionnal.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="bd9e8dc422bb8c8405359947fe9f4282b49f57f4">
+        <dex dex="E:\Android Project\HungryEnglishClub2ndPhase\app\build\intermediates\pre-dexed\debug\additionnal_4dcc4b298db03ef815dc90f481d5a78bcf16a53d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Bhadresh Chavada\.android\build-cache\670c3ba45e005420879bc22f7099c28488c87697\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="c733e9d1b065d940a08f2fca0ff920dfc08d94cc">
+        <dex dex="E:\Android Project\HungryEnglishClub2ndPhase\app\build\intermediates\pre-dexed\debug\classes_348e5a2e5250cbaf794b5af342fe7fbca441cc3a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Bhadresh Chavada\.android\build-cache\4db0b3b85b4b8375d53ea03d5acc89639f574881\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="2c1d9fbe7d2f686b3dcdbc3f63a983a211401ca3">
+        <dex dex="E:\Android Project\HungryEnglishClub2ndPhase\app\build\intermediates\pre-dexed\debug\classes_5d36340d64792d5297d2d9b7762f6a46a5df27d6.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\Android Project\HungryEnglishClub2ndPhase\app\libs\jxl.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="7faf62e0697f7a88954622dfe8c8de33ed142ac7">
+        <dex dex="E:\Android Project\HungryEnglishClub2ndPhase\app\build\intermediates\pre-dexed\debug\jxl_ec60555e0216c7d2131e7f679e2cc3703081e70d.jar" />
+    </item>
+
+</items>

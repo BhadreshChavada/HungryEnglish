@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="app.com.HungryEnglish">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".Activity.Teacher.MainActivity"></activity>
+        <activity
+            android:name=".Activity.SplashActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Activity.Admin.AdminTeacherList" />
+        <activity
+            android:name=".Activity.RegisterActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".Activity.LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".Activity.Student.StudentProfileActivity" />
+        <activity android:name=".Activity.Teacher.TeacherProfileActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".Activity.Teacher.TeacherListActivity">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN"/> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER"/> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <activity android:name=".Activity.Admin.AdminDashboardActivity" />
+        <activity android:name=".Activity.Student.StudentListActivity" />
+        <activity android:name=".Activity.Admin.AddImageOrLinkActivity" />
+        <activity android:name=".Activity.ForgotPassword" />
+        <activity android:name=".Activity.Teacher.Contactus"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".Activity.Admin.ReportActivity" />
+        <activity android:name=".Activity.Admin.ReportDetails" />
+
+        <!--
+          <service android:name=".MyFirebaseMessagingService">
+              <intent-filter>
+                  <action android:name="com.google.firebase.MESSAGING_EVENT" />
+              </intent-filter>
+          </service>
+
+          <service android:name=".MyFirebaseInstanceIDService">
+              <intent-filter>
+                  <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+              </intent-filter>
+          </service>
+        -->
+
+
+        <!--
+     Set custom default icon. This is used when no icon is set for incoming notification messages.
+     See README(https://goo.gl/l4GJaQ) for more.
+        -->
+        <!--
+         <meta-data
+             android:name="com.google.firebase.messaging.default_notification_icon"
+             android:resource="@mipmap/ic_launcher" />
+         &lt;!&ndash; Set color used with incoming notification messages. This is used when no color is set for the incoming
+              notification message. See README(https://goo.gl/6BKBk7) for more. &ndash;&gt;
+         <meta-data
+             android:name="com.google.firebase.messaging.default_notification_color"
+             android:resource="@color/colorAccent" />
+        -->
+
+
+        <!--
+             <meta-data
+             android:name="com.google.android.gms.version"
+             android:value="@integer/google_play_services_version" />
+        -->
+
+        <service android:name=".Services.DownloadService" />
+
+        <activity android:name=".Main2Activity"></activity>
+    </application>
+
+</manifest>

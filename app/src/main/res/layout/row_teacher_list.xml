@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/_9sdp"
+    android:layout_marginBottom="@dimen/_9sdp"
+    android:layout_marginRight="@dimen/_15sdp"
+    android:layout_marginLeft="@dimen/_15sdp"
+    android:background="@drawable/list_item_bg"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/_10sdp">
+
+
+    <LinearLayout
+        android:id="@+id/llMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ivTeacherProfilePic"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_100sdp"
+            android:scaleType="centerCrop"
+            android:paddingBottom="@dimen/_10sdp"
+            android:paddingLeft="@dimen/_10sdp"
+            android:paddingRight="@dimen/_10sdp"
+            android:src="@drawable/ic_user_default"
+            app:civ_border_color="@color/colorAccent"
+            app:civ_border_width="2dp"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+
+        <TextView
+                android:id="@+id/tvTeacherName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_2sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:maxLines="1"
+                android:text="@string/teacher_name"
+                android:textAllCaps="true"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_18sdp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:text="@string/nearest_railway_station_label"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tvClosestStation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tvSpecialSkills"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:text="@string/special_skils_label"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tvTeacherAvaibility"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:text="@string/teacher_avaibility_label"
+                android:textColor="@color/black" />
+
+
+
+
+        </LinearLayout>
+
+        </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llEditDel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/list_item_button_bg"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:padding="@dimen/_6sdp">
+
+        <TextView
+            android:id="@+id/tvReportTeacher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_button"
+            android:gravity="center"
+            android:padding="@dimen/_5sdp"
+            android:text="@string/report_teacher"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

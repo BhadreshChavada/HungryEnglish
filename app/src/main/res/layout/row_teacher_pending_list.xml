@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/_9sdp"
+    android:layout_marginBottom="@dimen/_9sdp"
+    android:layout_marginRight="@dimen/_15sdp"
+    android:layout_marginLeft="@dimen/_15sdp"
+    android:background="@drawable/list_item_bg"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/_10sdp">
+
+
+    <LinearLayout
+        android:id="@+id/llMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/ivTeacherProfilePic"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_100sdp"
+            android:scaleType="centerCrop"
+            android:paddingBottom="@dimen/_10sdp"
+            android:paddingLeft="@dimen/_10sdp"
+            android:paddingRight="@dimen/_10sdp"
+            android:src="@drawable/ic_user_default"
+            app:civ_border_color="@color/colorAccent"
+            app:civ_border_width="2dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tvTeacherName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginBottom="@dimen/_2sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:text="@string/teacher_name"
+                android:textAllCaps="true"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_18sdp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvTeacherName"
+                android:text="@string/teacher_email"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tvMobileNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvEmail"
+                android:text="@string/teacher_mobile_no"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tvTeacherAvaibility"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_below="@id/tvMobileNo"
+                android:layout_weight="1"
+                android:text="@string/teacher_avaibility"
+                android:textColor="@color/black" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llEdtStudent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/list_item_button_bg"
+        android:orientation="horizontal"
+        android:padding="@dimen/_6sdp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/ivEdit"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:tint="@color/white"
+                android:src="@drawable/ic_edit"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                />
+
+            <ImageView
+                android:id="@+id/ivRemove"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:tint="@color/redDelete"
+                android:src="@drawable/ic_remove"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                />
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tvAcceptInvitation"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|bottom"
+            android:background="@drawable/rounded_button"
+            android:gravity="center"
+            android:text="@string/accept_invitation"
+            android:textSize="@dimen/_16sdp"
+            android:textColor="@color/white"/>
+    </LinearLayout>
+
+</LinearLayout>
